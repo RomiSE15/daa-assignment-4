@@ -1,0 +1,104 @@
+[
+  {
+    "name": "lcs-empty",
+    "input": {"task": "lcs", "a": "", "b": "abc"},
+    "expected": {"length": 0, "sequence": ""},
+    "checks": "empty first string"
+  },
+  {
+    "name": "lcs-none",
+    "input": {"task": "lcs", "a": "abc", "b": "xyz"},
+    "expected": {"length": 0, "sequence": ""},
+    "checks": "no shared characters"
+  },
+  {
+    "name": "lcs-subsequence",
+    "input": {"task": "lcs", "a": "axbycz", "b": "abc"},
+    "expected": {"length": 3, "sequence": "abc"},
+    "checks": "common subsequence that is not a substring"
+  },
+  {
+    "name": "merge-empty",
+    "input": {"task": "merge", "sizes": []},
+    "expected": {"cost": 0, "plan": []},
+    "checks": "no blocks"
+  },
+  {
+    "name": "merge-one",
+    "input": {"task": "merge", "sizes": [7]},
+    "expected": {"cost": 0, "plan": []},
+    "checks": "one block needs no merge"
+  },
+  {
+    "name": "merge-adjacency",
+    "input": {"task": "merge", "sizes": [1, 100, 1]},
+    "expected": {"cost": 203, "plan": [[1, 1, 2], [0, 0, 2]]},
+    "checks": "only adjacent blocks may merge; cost is not 1+1 then 102"
+  },
+  {
+    "name": "tree-negative",
+    "input": {"task": "tree", "n": 2, "weights": [-2, -3], "edges": [[0, 1]]},
+    "expected": {"weight": 0, "selected": []},
+    "checks": "all-negative tree uses the empty set"
+  },
+  {
+    "name": "tree-adjacent",
+    "input": {"task": "tree", "n": 2, "weights": [5, 5], "edges": [[0, 1]]},
+    "expected": {"weight": 5, "selected": [1]},
+    "checks": "adjacent equal weights: one vertex, not both"
+  },
+  {
+    "name": "naive-overlap",
+    "input": {"task": "naive", "text": "aaaa", "pattern": "aa"},
+    "expected": {"positions": [0, 1, 2]},
+    "checks": "overlapping starts"
+  },
+  {
+    "name": "naive-empty-pattern",
+    "input": {"task": "naive", "text": "ab", "pattern": ""},
+    "expected": {"positions": [0, 1, 2]},
+    "checks": "empty pattern matches every boundary"
+  },
+  {
+    "name": "kmp-overlap",
+    "input": {"task": "kmp", "text": "abababa", "pattern": "aba"},
+    "expected": {"positions": [0, 2, 4]},
+    "checks": "KMP keeps overlapping matches"
+  },
+  {
+    "name": "rk-collision",
+    "input": {"task": "rk", "text": "abdj", "pattern": "ab"},
+    "expected": {"positions": [0]},
+    "checks": "equal hash of ab and dj is not reported without a character match"
+  },
+  {
+    "name": "rk-second-window",
+    "input": {"task": "rk", "text": "abdj", "pattern": "dj"},
+    "expected": {"positions": [2]},
+    "checks": "the other colliding window is a real match"
+  },
+  {
+    "name": "suffix-banana",
+    "input": {"task": "suffix", "text": "banana"},
+    "expected": {"sa": [5, 3, 1, 0, 4, 2], "lcp": [0, 1, 3, 0, 0, 2], "repeated": "ana"},
+    "checks": "suffix array, Kasai LCP and a longest repeat"
+  },
+  {
+    "name": "suffix-empty",
+    "input": {"task": "suffix", "text": ""},
+    "expected": {"sa": [], "lcp": [], "repeated": ""},
+    "checks": "empty text"
+  },
+  {
+    "name": "aho-suffix-duplicate",
+    "input": {"task": "aho", "patterns": ["he", "she", "he"], "texts": ["sheshe", ""]},
+    "expected": {"counts": [[2, 2, 2], [0, 0, 0]]},
+    "checks": "suffix pattern he is counted, duplicates match, empty text is zero"
+  },
+  {
+    "name": "aho-empty-dictionary",
+    "input": {"task": "aho", "patterns": [], "texts": ["a"]},
+    "expected": {"counts": [[]]},
+    "checks": "empty dictionary gives an empty count row"
+  }
+]

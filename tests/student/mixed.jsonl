@@ -1,0 +1,4 @@
+{"task": "lcs", "a": "tea_time", "b": "team"}
+{"task": "merge", "sizes": [2, 3, 4]}
+{"task": "naive", "text": "aaaa", "pattern": "aa"}
+{"task": "lcs", "a": "", "b": "abc"}
